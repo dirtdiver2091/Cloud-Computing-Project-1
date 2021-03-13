@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="stylesheet" type="text/css" href="{{ url_for(filename='css/home_page_style.css') }}">
+
+	<title>Cloud Computing Image Processing App</title>
+
+</head>
+
+<body>
+	<center>
+	<h1>Image processing application</h1>
+
+    <br>
+    <br>
+
+    <p>To use the website, first upload an image, then choose a filter to edit the image, and lastly download that image!</p>
+
+    <br>
+    <br>
+
+	<div class="container">
+		<p>Upload a photo<p>
+            <label class="btn btn-primary">
+                Upload image
+            </label>
+            <br>
+		    <br>
+		<p>Choose a filter<p>
+            <label class="btn btn-primary">
+                filters
+            </label>
+            <br>
+		    <br>
+		<p>Click edit button<p>
+		<form id ="upload-photo" method="post">
+		<div>
+            <button type="button" class="btn btn-success" id="btn-predict">Edit</button>
+        </div>
+	</form>
+	</div>
+	</center>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+
+</html>
