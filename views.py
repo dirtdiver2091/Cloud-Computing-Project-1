@@ -32,30 +32,29 @@ def index():
 
 		# erase temp images, reset form
 
-		# redirect to content page
-		return redirect("content")
+		# Load all saved and edited images from s3
+		get_images_from_s3()
 
 	return render_template('index.html')
 
-@views.route("/content")
 def get_images_from_s3():
 
-	# make request to s3 that gets list of all files in bucket
+	# Make a request to the s3, which will get a list of all files in the bucket
 	response = list_content()
 
-	# get the url for every file
-	photos = []
+	# Get the url for each file pulled
+	images = []
 	for item in response:
-		photos.append(config.base_s3_url + item["Key"])
+		images.append(config.base_s3_url + item["Key"])
 
-	# inject that url into html img tag
-	return render_template('content.html', photo_urls=photos)
+	# Inject that specific url into the html img tag
+	return render_template('index.html', photo_urls=images)
 
 
 def applyFilter(filename, filter):
 
     # Retrieve image here
-    image = Image.open(os.path.join(config.Changed_Image, filename))
+    image = Image.open(os.path.join(config.Changed_Images, filename))
 
     if filter == 'gray':
         im = ImageOps.grayscale(image)
@@ -66,7 +65,7 @@ def applyFilter(filename, filter):
 
 	filtered_image = "filtered_" + filename
 
-	im.save(os.path.join(config.Changed_Image, filtered_image))
+	im.save(os.path.join(config.Changed_Images, filtered_image))
 	return filtered_image
 
 if __name__ == "__main__":
