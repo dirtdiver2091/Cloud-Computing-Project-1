@@ -23,44 +23,31 @@
     <br>
     <br>
 
-    <p>To use the website, first upload an image, then choose a filter to edit the image, and lastly download that image!</p>
+    <p>To use the website, first upload an image, then choose a filter to edit the image, and lastly see the resultant image and download that it!</p>
 
     <br>
     <br>
 
 	<div class="container">
 
-		<h4>Upload an image<h4>
+        <form action="/home" method="POST" enctype="multipart/form-data">
 
-            <label class="btn btn-primary">
-                Upload image
-            </label>
-
-            <br>
-		    <br>
-
-		<h4>Choose a filter:<h4>
-
-            <br>
-
-            <table class="table">
-            <tr>
-            <td><input type="radio" name="preset" value="gray">&nbsp;Gray</td>
-            <td><input type="radio" name="preset" value="blur">&nbsp;Blur</td>
-            <td><input type="radio" name="preset" value="solar">&nbsp;Solar</td>
-            </tr>
-            </table>
-            
-
-            <br>
-            <br>
-            
-		<h4>Click edit button<h4>
-
-		<form id ="upload-photo" method="post">
-		<div>
-            <button type="button" class="btn btn-success" id="btn-predict">Edit</button>
-        </div>
+			<div class="form-group">
+	          <label>Upload an image</label>
+	          <div class="custom-file">
+	            <input type="file" class="custom-file-input" name="image" id="image">
+	            <label class="custom-file-label" for="image">Choose an image</label>
+	          </div>
+	        </div>
+	        <input type="radio" id="grayscale" value="grayscale" name="transformation">
+	        <label for="grayscale">Grayscale</label>
+	        <input type="radio" id="blur" value="blur" name="transformation">
+	        <label for="blur">Blur</label>
+	        <input type="radio" id="solar" value="solar" name="transformation">
+	         <label for="solar">Solar</label>
+	        <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
+	        <button type="submit" class="btn btn-success" id="btn-predict">Filterize</button>
+	    </form>
 
 	</form>
 	</div>
