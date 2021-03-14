@@ -1,5 +1,4 @@
 import config
-
 import boto3
 
 bucket_name = config.bucket_name
