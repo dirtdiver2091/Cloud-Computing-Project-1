@@ -29,8 +29,6 @@ def index():
         # Uploading to s3
         upload(os.path.join(config.Changed_Images, changed_image), changed_image)
 
-        # erase temp images, reset form
-
         # Load all saved and edited images from s3
         get_images_from_s3()
 
