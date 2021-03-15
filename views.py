@@ -24,15 +24,17 @@ def index():
             img.save(os.path.join(config.Changed_Images, img.filename))
 
         # Change the image
-        changed_image = apply_filter(img.filename, apply_filter)
+        changed_image = apply_filter(img.filename, image_change)
 
         # Uploading to s3
         upload(os.path.join(config.Changed_Images, changed_image), changed_image)
 
-        # Load all saved and edited images from s3
-        get_images_from_s3()
+        urls = []
 
-    return render_template('index.html')
+        # Load all saved and edited images from s3
+        urls = get_images_from_s3()
+
+    return render_template('index.html', photo_urls=get_images_from_s3())
 
 
 def get_images_from_s3():
@@ -45,7 +47,7 @@ def get_images_from_s3():
         images.append(config.base_s3_url + item["Key"])
 
     # Inject that specific url into the html img tag
-    return render_template('index.html', photo_urls=images)
+    return images
 
 
 def apply_filter(filename, filter_chosen):
@@ -55,14 +57,13 @@ def apply_filter(filename, filter_chosen):
     if filter_chosen == 'gray':
         im = ImageOps.grayscale(image)
     elif filter_chosen == 'blur':
-        im = ImageOps.filter(ImageFilter.BLUR)
+        im = image.filter(ImageFilter.BLUR)
     elif filter_chosen == 'solar':
         im = ImageOps.solarize(image, threshold=80)
 
-        filtered_image = "filtered_" + filename
-
-        im.save(os.path.join(config.Changed_Images, filtered_image))
-        return filtered_image
+    filtered_image = "filtered_" + filename
+    im.save(os.path.join(config.Changed_Images, filtered_image))
+    return filtered_image
 
 
 if __name__ == "__main__":
