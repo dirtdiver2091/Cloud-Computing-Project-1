@@ -3,7 +3,7 @@ import os
 import uuid
 
 from s3_handling import list_content, upload
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, send_from_directory
 from PIL import Image, ImageOps, ImageFilter
 
 views = Flask(__name__)
@@ -64,6 +64,10 @@ def apply_filter(filename, filter_chosen):
     filtered_image = "filtered_" + filename
     im.save(os.path.join(config.Changed_Images, filtered_image))
     return filtered_image
+
+@views.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    return send_from_directory(directory=os.getcwd() + "/Changed_Images", filename=filename + ".JPG")
 
 
 if __name__ == "__main__":
