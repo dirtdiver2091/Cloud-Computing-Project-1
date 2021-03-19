@@ -65,10 +65,6 @@ def apply_filter(filename, filter_chosen):
     im.save(os.path.join(config.Changed_Images, filtered_image))
     return filtered_image
 
-@views.route('/uploads/<path:filename>', methods=['GET', 'POST'])
-def download(filename):
-    return send_from_directory(directory=os.getcwd() + "/Changed_Images", filename=filename + ".JPG")
-
 
 if __name__ == "__main__":
     views.run(debug=True)
